@@ -1,0 +1,22 @@
+﻿@model CodePrep.Models.SlayerBeastVM
+@{
+    ViewBag.Title = "SlayerList";
+}
+
+<h2>SlayerList for @Model.CategoryID</h2>
+
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            @foreach (var beast in Model.Beasts)
+            {
+                <li class="list-group-item">
+                    @beast.Label - @beast.Value
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+
+
