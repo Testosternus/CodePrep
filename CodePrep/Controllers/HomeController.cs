@@ -1,6 +1,7 @@
 ﻿using CodePrep.Models;
 using CodePrep.Services;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,7 @@ namespace CodePrep.Controllers
             return View();
         }
 
-        public async Task<ActionResult> SlayerList(int id=112)
+        public async Task<ActionResult> SlayerList(int id)
         {
 
             var response = await client.GetStringAsync($"{client.BaseAddress}/slayerBeasts.json?identifier={id}");
@@ -41,6 +42,26 @@ namespace CodePrep.Controllers
             {
                 Beasts = data,
                 CategoryID = id
+            });
+        }
+
+        public async Task<ActionResult> SlayerCatNames()
+        {
+            var response = await client.GetStringAsync($"{client.BaseAddress}/slayerCatNames.json");
+
+            var data = JsonConvert.DeserializeObject(response);
+
+            var slayerCatNames = (data as JObject).AsJEnumerable();
+            IList<ResponseBasic> cats = new List<ResponseBasic>();
+            foreach(var cat in slayerCatNames)
+            {
+                string[] catStr = cat.ToString().Split(':');
+                cats.Add(new ResponseBasic { Label = catStr[0], Value = Int32.Parse(catStr[1]) });
+            }
+
+            return View(new SlayerCatNamesVM
+            {
+                SlayerCategories = cats
             });
         }
 

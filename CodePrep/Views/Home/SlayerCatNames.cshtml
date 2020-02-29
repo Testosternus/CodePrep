@@ -1,0 +1,20 @@
+﻿@model CodePrep.Models.SlayerCatNamesVM
+@{
+    ViewBag.Title = "SlayerCatNames";
+}
+
+<h2>SlayerCatNames</h2>
+
+<div class="row">
+    <div class="col-md-4">
+        <ul class="list-group">
+            @foreach (var category in Model.SlayerCategories)
+            {
+                <li class="list-group-item">
+                    @category.Label - @Html.ActionLink($"{category.Value}", "SlayerList",new { id = category.Value})
+                </li>
+            }
+        </ul>
+    </div>
+</div>
+

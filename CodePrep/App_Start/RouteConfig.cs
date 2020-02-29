@@ -19,10 +19,10 @@ namespace CodePrep
                 defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
             );
 
-            routes.MapRoute(
-                name: "slayerbeasts",
-                url: "{controller}/{action}/{id}"
-                );
+            //routes.MapRoute(
+            //    name: "slayerbeasts",
+            //    url: "{controller}/{action}/{id}"
+            //    );
         }
     }
 }
